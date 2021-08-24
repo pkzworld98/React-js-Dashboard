@@ -1,0 +1,149 @@
+/* login box form */
+
+* {
+  font-weight: bold;
+  color: white;
+}
+
+.loginBox {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.4);
+
+  /* box-shadow: 2px 2px 2px 2px grey; */
+  position: relative;
+
+  /* 
+color:rgb(145, 42, 42) */
+}
+
+.or h1 {
+  overflow: hidden;
+  text-align: center;
+  color: rgb(197, 146, 5);
+  font-size: large;
+}
+.or h1:before,
+.or h1:after {
+  background-color: rgb(146, 146, 146);
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+.or h1:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+.or h1:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+.apilogin {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .apilogin */
+
+.apilogin Button {
+  width: 100px;
+}
+.loginBoxform {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+  /* position: relative; */
+
+  flex: 1;
+  padding: 70px 50px 40px 50px;
+}
+
+.loginBoxImage {
+  /* border: 3px solid green; */
+  position: absolute;
+  top: -80px;
+  height: 140px;
+  background-color: white;
+  clip-path: circle(45% at 50% 50%);
+}
+.loginBoxImage img {
+  height: 140px;
+}
+
+.form-label {
+  color: rgb(255, 217, 0);
+}
+
+/* checkbox */
+
+/* Hide the default checkbox */
+input[type="checkbox"] {
+  visibility: hidden;
+}
+
+/* Creating a custom checkbox
+        based on demand */
+.geekmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: black;
+}
+
+/* Specify the background color to be
+        shown when hovering over checkbox */
+.main:hover input ~ .geekmark {
+  background-color: yellow;
+}
+
+/* Specify the background color to be
+        shown when checkbox is active */
+.main input:active ~ .geekmark {
+  background-color: red;
+}
+
+/* Specify the background color to be
+        shown when checkbox is checked */
+.main input:checked ~ .geekmark {
+  background-color: green;
+}
+
+/* Checkmark to be shown in checkbox */
+/* It is not be shown when not checked */
+.geekmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Display checkmark when checked */
+.main input:checked ~ .geekmark:after {
+  display: block;
+}
+
+/* Styling the checkmark using webkit */
+/* Rotated the rectangle by 45 degree and 
+        showing only two border to make it look
+        like a tickmark */
+.main .geekmark:after {
+  left: 8px;
+  bottom: 5px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 4px 4px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

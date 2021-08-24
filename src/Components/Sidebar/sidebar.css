@@ -1,0 +1,33 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* border: 3px solid red; */
+
+  height: 100%;
+}
+.sidebar_top {
+  /* flex: 0, 2; */
+  height: 18%;
+
+  background: url("../../mlogo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 70%;
+  /* position: absolute;
+  height: 100px;
+  width: 100px; */
+  background-position: center;
+  position: relative;
+  bottom: 58px;
+  left: 20px;
+}
+.sidebar_body {
+  height: 85%;
+}
+
+/* .sidebar_body ListItem {
+  border: 3px solid black;
+} */
+.sidebar_item {
+}

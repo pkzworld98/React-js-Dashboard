@@ -1,0 +1,32 @@
+.admin_sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* position: relative; */
+
+  height: 100%;
+}
+.admin_sidebar_top {
+  height: 18%;
+  /* border: 3px solid green; */
+  background: url("../../../mlogo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 70%;
+  /* position: absolute;
+  height: 100px;
+  width: 100px; */
+  background-position: center;
+  position: relative;
+  bottom: 58px;
+  left: 20px;
+}
+.admin_sidebar_body {
+  height: 85%;
+}
+
+/* .sidebar_body ListItem {
+  border: 3px solid black;
+} */
+.admin_sidebar_item {
+}

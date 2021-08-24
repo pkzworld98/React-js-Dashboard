@@ -1,0 +1,12 @@
+.signUpBox {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.4);
+
+  /* box-shadow: 2px 2px 2px 2px grey; */
+  position: relative;
+}

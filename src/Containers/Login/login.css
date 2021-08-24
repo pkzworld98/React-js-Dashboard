@@ -1,0 +1,29 @@
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: relative; */
+}
+
+.login_new_user {
+  display: flex;
+  position: absolute;
+  letter-spacing: 1px;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2px 10px;
+  border-radius: 6px;
+}
+
+.login_new_user_link {
+  cursor: pointer;
+  margin-left: 4px;
+  text-decoration: none;
+  letter-spacing: 0px;
+  color: rgb(197, 146, 5);
+  padding: 2px 2px;
+}
+.login_new_user_text {
+  font-weight: lighter;
+}

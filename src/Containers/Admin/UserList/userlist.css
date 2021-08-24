@@ -1,0 +1,8 @@
+.activate_mode {
+  background: black;
+  fill: rgb(197, 146, 5);
+  border: 3px solid green;
+}
+.deactivate_mode {
+  background-color: rgb(252, 212, 102);
+}

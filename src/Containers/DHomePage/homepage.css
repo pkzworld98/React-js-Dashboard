@@ -1,0 +1,108 @@
+.dhomepage {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  background: url("../../back.png");
+  background-size: cover;
+  /* border: 3px solid pink; */
+  background-repeat: no-repeat;
+}
+
+.dhomecontainer {
+  display: flex;
+  height: 96vh;
+  width: 96vw;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+  /* border: 3px solid blue; */
+
+  background: rgba(0, 0, 0, 0.5);
+
+  box-sizing: border-box;
+}
+.dhomepage_content {
+  height: 92%;
+  width: 100%;
+  /* border: 3px solid yellow; */
+  display: flex;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  align-items: center;
+
+  flex-direction: row;
+}
+.dhomepage_header {
+  height: 8%;
+  width: 100%;
+  /* border: 3px solid blueviolet; */
+  display: flex;
+
+  align-items: center;
+
+  width: inherit;
+}
+
+.domehomepage_header_content {
+  flex: 0.9;
+}
+.dhomepage_header_user {
+  /* border: 3px solid black; */
+  /* display: flex;
+  justify-content: flex-end;
+  flex: 0.1;
+  color: rgb(213, 141, 7); */
+}
+
+.dhomepage_header_button {
+  /* border: 1px solid violet; */
+  display: flex;
+
+  justify-content: space-between;
+  padding-left: 20px;
+
+  margin-top: 4px;
+  padding: 5px 10px;
+  flex: 0.1;
+
+  /* border: 3px solid red; */
+
+  /* margin: 1px 1px 2px 1px; */
+}
+
+.numberOfItems_cart {
+  clip-path: circle(40% at 50% 50%);
+  width: fit-content;
+  color: rgb(197, 146, 5);
+  background-color: white;
+  font-size: 13px;
+  /* font-weight: bolder; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  width: 25px;
+  border: 1px solid black;
+  position: absolute;
+  top: 35px;
+  padding: 1px 1px;
+  z-index: 1;
+  right: 170px;
+}
+.dhomepage_header_button_admin {
+  display: flex;
+
+  justify-content: center;
+  padding-left: 20px;
+
+  margin-top: 4px;
+  padding: 5px 10px;
+  flex: 0.1;
+}

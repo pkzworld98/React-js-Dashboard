@@ -1,0 +1,21 @@
+#avatar {
+  cursor: pointer;
+}
+
+.menu_head {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* box-shadow: 0px 0px 0px 1px silver; */
+  justify-content: left;
+}
+.menu_head_name {
+  color: rgb(213, 141, 7);
+  word-wrap: break-word;
+}
+.menu_head_email {
+  font-size: x-small;
+  word-wrap: break-word;
+
+  font-weight: lighter;
+}
