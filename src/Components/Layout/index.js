@@ -13,7 +13,11 @@ function Layout(props) {
       {props.sidebar ? (
         <div className="layout_main">
           <div className="layout_sidebar">
-            {role === "admin" ? <AdminSidebar /> : <Sidebar />}
+            {role === "admin" || role === "superadmin" ? (
+              <AdminSidebar />
+            ) : (
+              <Sidebar />
+            )}
           </div>
 
           <div className="layout_body">{props.children}</div>

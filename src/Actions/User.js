@@ -1,6 +1,7 @@
 import firebase from "../firebase";
 import cuid from "cuid";
 import {
+  CLEAR_CART,
   FETCH_USER_LIST,
   LOGIN_ERROR,
   LOGIN_REQUEST,
@@ -15,9 +16,10 @@ import {
   UPDATE_ROLE,
 } from "./types";
 
+//////MANAGING SIGNUP
+
 export const signup = ({ userName, email, pass }) => {
   return (dispatch) => {
-    // console.log(userName,email,pass,adminrole,"pk")
     console.log(userName, "dekho bhai ", email);
 
     firebase
@@ -26,8 +28,9 @@ export const signup = ({ userName, email, pass }) => {
       .then((userCredential) => {
         let displayName = userName;
         const user = { email, displayName };
+        console.log(user, "yei hai user");
 
-        dispatch(saveUsertofirebase({ user }));
+        dispatch(saveUser({ user }));
       })
       .catch((error) => {
         // var errorCode = error.code;
@@ -42,6 +45,8 @@ export const signup = ({ userName, email, pass }) => {
   };
 };
 
+////MANAGING LOGIN
+
 export const login = ({ email, pass, adminrole }) => {
   return async (dispatch) => {
     const role = adminrole ? "admin" : "user";
@@ -49,13 +54,6 @@ export const login = ({ email, pass, adminrole }) => {
       .auth()
       .signInWithEmailAndPassword(email, pass)
       .then((userCredential) => {
-        // Signed in
-        // dispatch({
-        //   type: LOGIN_USER,
-        //   email,
-        //   pass,
-        //   role,
-        // });
         dispatch({
           type: REMOVE_ERROR,
         });
@@ -72,6 +70,8 @@ export const login = ({ email, pass, adminrole }) => {
       });
   };
 };
+
+////MANAGING GOOGLE LOGIN
 
 export const googleApi = () => {
   return async (dispatch) => {
@@ -100,18 +100,11 @@ export const googleApi = () => {
           type: SIGN_UP_ERROR,
           errorMessage,
         });
-        // Handle Errors here.
-        // var errorCode = error.code;
-
-        // // The email of the user's account used.
-        // var email = error.email;
-        // // The firebase.auth.AuthCredential type that was used.
-        // var credential = error.credential;
-
-        // ...
       });
   };
 };
+
+////MANAGING SIGNOUT
 
 export const signOut = () => {
   return async (dispatch) => {
@@ -122,10 +115,15 @@ export const signOut = () => {
         dispatch({
           type: LOGOUT_USER,
         });
+        dispatch({
+          type: CLEAR_CART,
+        });
       })
       .catch((e) => {});
   };
 };
+
+////////MANAGING REQUEST
 
 export const signUpRequest = () => {
   return async (dispatch) => {
@@ -143,49 +141,45 @@ export const loginRequest = () => {
   };
 };
 
+////INTIALIZE USER
+
 export const intializeUser = () => {
   return async (dispatch) => {
-    let admin = await getAdminId();
-
-    // console.log(admin[0], "finaally ", typeof admin);
     await firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // // User is signed in, see docs for a list of available properties
-        // // https://firebase.google.com/docs/reference/js/firebase.User
-
-        console.log(user, "user details", admin);
         const displayName = user.displayName;
         const photo = user.photoURL;
         const email = user.email.replace(".", ",");
-        let adminOrNot = false;
-        admin.forEach((val) => {
-          if (val === email) {
-            adminOrNot = true;
-          }
-        });
-        // console.log("yei mila", adminOrNot);
-        // console.log(String(email) in admin, "true hai admin hai");
-
-        if (adminOrNot) {
-          console.log("Admin hai");
-          dispatch({
-            type: SET_ADMIN,
-            displayName,
-            photo,
-            email,
-            role: "admin",
-          });
-        } else {
-          console.log("User hai");
-          dispatch({
-            type: SET_USER,
-            displayName,
-            photo,
-            email,
-            role: "user",
-          });
-        }
-        // ...
+        firebase
+          .database()
+          .ref("/")
+          .child("user")
+          .child(email)
+          .child("role")
+          .get()
+          .then((r) => {
+            var role = r.val();
+            if (role === "admin" || role === "superadmin") {
+              console.log("Admin hai");
+              dispatch({
+                type: SET_ADMIN,
+                displayName,
+                photo,
+                email,
+                role: role,
+              });
+            } else {
+              console.log("User hai");
+              dispatch({
+                type: SET_USER,
+                displayName,
+                photo,
+                email,
+                role: "user",
+              });
+            }
+          })
+          .catch((e) => {});
       } else {
         // User is signed out
         // ...
@@ -194,96 +188,75 @@ export const intializeUser = () => {
   };
 };
 
-const getAdminId = () => {
-  return new Promise((resolve, reject) => {
-    let admin;
-    firebase
+////SAVE USER TO FIREBASE WHEN USED SIGN UP BOX
+
+const saveUser = ({ user }) => {
+  return async (dispatch) => {
+    const email = user.email;
+    const id = email.replace(".", ",");
+    await firebase
       .database()
       .ref("/")
       .child("user")
-      .orderByChild("role")
-      .equalTo("admin")
+      .child(id)
+      .set({
+        email: user.email,
+        displayName: user.displayName,
 
-      .once("value", function (data) {
-        console.log("Start at filter: ", data.val());
-        admin = Object.keys(data.val());
-        resolve(admin);
+        role: "user",
+      })
+      .then((r) => {
+        console.log("hopgyaa save data");
+      })
+      .catch((e) => {
+        console.log(e, "error meesssage aagya ");
       });
-
-    // .then((snapshot) => {
-    //   if (snapshot.exists()) {
-    //     console.log(snapshot.val(), "abhi wala value");
-    //     snapshot.val().forEach((val) => {
-    //       console.log(val);
-    //     });
-    //     let result = snapshot.val().filter;
-
-    //     console.log("Result aaillooo", result);
-
-    // let result = snapshot.val().filter((val) => {
-
-    //   return([
-    //     val.role==="admin"?val:
-
-    //   ]
-
-    //   )
-
-    // });
-    // console.log(result, "pappu ka answer");
-    //   // admin = Object.keys(snapshot.val());
-    // } else {
-    //   console.log("No data available");
-    // }
-    // })
-    // .catch((error) => {
-    //   console.error(error);
-    // });
-
-    // task.then((val)=>{
-
-    // })
-    return admin;
-  });
+  };
 };
+
+/// SAVE USER TO FIREBASE WHEN GOOGLE LOGIN IS USED
 
 export const saveUsertofirebase = ({ user }) => {
   return async (dispatch) => {
-    let adminList = await getAdminId();
-
     const email = user.email;
     const id = email.replace(".", ",");
+    var role;
 
-    let adminOrNot = false;
-    adminList.forEach((val) => {
-      if (val === id) {
-        adminOrNot = true;
-      }
-    });
+    const result = await firebase
+      .database()
+      .ref("/")
+      .child("user")
+      .child(id)
+      .child("role")
+      .get()
 
-    console.log("I have entered inside the block", adminOrNot);
-    if (!adminOrNot) {
-      firebase
-        .database()
-        .ref("/")
-        .child("user")
-        // .child("normalUser")
-        .child(id)
-        .set({
-          email: user.email,
-          displayName: user.displayName,
+      .then((r) => {
+        role = r.val();
+        if (role === "user") {
+          // console.log("ghus to rha hai sonali");
+          firebase
+            .database()
+            .ref("/")
+            .child("user")
+            .child(id)
+            .set({
+              email: user.email,
+              displayName: user.displayName,
 
-          role: "user",
-        })
-        .then((r) => {
-          console.log("hopgyaa save data");
-        })
-        .catch((e) => {
-          console.log(e, "error meesssage aagya ");
-        });
-    }
+              role: "user",
+            })
+            .then((r) => {
+              console.log("hopgyaa save data");
+            })
+            .catch((e) => {
+              console.log(e, "error meesssage aagya ");
+            });
+        }
+      });
   };
 };
+
+////FETCHING USER LIST
 
 export const fetchUserList = () => {
   return async (dispatch) => {
@@ -305,43 +278,7 @@ export const fetchUserList = () => {
   };
 };
 
-export const createAdmin = ({ email, pass, displayName }) => {
-  // return async (dispatch) => {
-  //   const id = email.replace(".", ",");
-  //   firebase
-  //     .auth()
-  //     .createUserWithEmailAndPassword(email, pass)
-  //     .then((userCredential) => {
-  //       //  let displayName = userName;
-  //       //  const user = { email, displayName };
-  //       firebase
-  //         .database()
-  //         .ref("/")
-  //         .child("user")
-  //         .child(id)
-  //         .set({
-  //           email: email,
-  //           displayName: displayName,
-  //           role: "admin",
-  //         })
-  //         .then((r) => {
-  //           console.log("hopgyaa save data");
-  //         })
-  //         .catch((e) => {
-  //           console.log(e, "error meesssage aagya ");
-  //         });
-  //     })
-  //     .catch((error) => {
-  //       // var errorCode = error.code;
-  //       var errorMessage = error.message;
-  //       dispatch({
-  //         type: SIGN_UP_ERROR,
-  //         errorMessage,
-  //       });
-  //       // ..
-  //     });
-  // };
-};
+////CHANGING THE ROLE FROM USER TO ADMIN OR ADMIN TO USER
 
 export const changeRole = (row) => {
   return async (dispacth) => {
@@ -376,40 +313,3 @@ export const changeRole = (row) => {
       });
   };
 };
-
-// export const makeAdmin = (row) => {
-//   return async (dispacth) => {
-//     console.log("admin mei change hogaa");
-
-//   };
-// };
-
-// export const makeUser = (row) => {
-//   console.log("user mei change hogaa");
-//   return async (dispacth) => {
-//     const id = row.email.replace(".", ",");
-//     await firebase
-//       .database()
-//       .ref("/")
-//       .child("user")
-//       .child(id)
-//       .update({
-//         role: "user",
-//       })
-//       // .onProgress((snapshot) => {
-//       //   console.log(snapshot, "progress hai bhai");
-//       // })
-//       .then((r) => {
-//         dispacth({
-//           type: SHOW_MESSAGE,
-//           message: "Role changed to User",
-//           emo: "success",
-//         });
-
-//         console.log("user mei change kiye");
-//       })
-//       .catch((e) => {
-//         console.log(e);
-//       });
-//   };
-// };

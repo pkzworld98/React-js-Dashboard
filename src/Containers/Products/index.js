@@ -12,11 +12,13 @@ import CardMedia from "@material-ui/core/CardMedia";
 import AddShoppingCartTwoToneIcon from "@material-ui/icons/AddShoppingCartTwoTone";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../Actions";
+import { useState } from "react";
 
 const useStylesCard = makeStyles({
   root: {
-    maxWidth: 345,
     width: 300,
+    maxWidth: 300,
+
     background: "rgba(0, 0, 0, 0.5)",
     marginTop: "40px",
   },
@@ -53,6 +55,15 @@ function Products() {
   const cardclasses = useStylesCard();
 
   const productList = useSelector((state) => state.products.productList);
+  const handleAddButton = (value) => {
+    var show = false;
+    for (let r of cartItems) {
+      if (r.item.id === value.id) {
+        show = true;
+      }
+    }
+    return show;
+  };
 
   return (
     <DHomePage sidebar>
@@ -77,22 +88,34 @@ function Products() {
                           <div className="cardcontent">
                             <div className="cardcontent_top">{value.name}</div>
                             <div className="cardcontent_bottom ">
-                              <div className="product_price">{value.price}</div>
+                              <div className="product_price">
+                                <div id="currency">Rs.</div>
+                                {value.price}
+                              </div>
 
                               <CardActions>
-                                <IconButton
-                                  onClick={(e) => {
-                                    addItemtoCart({ e, value });
-                                  }}
-                                >
-                                  <AddShoppingCartTwoToneIcon
-                                    style={{
-                                      fontSize: "larger",
-
-                                      fill: "rgb(197, 146, 5)",
+                                {handleAddButton(value) ? (
+                                  <div
+                                    className="item_added"
+                                    style={{ color: "rgb(197, 146, 5)" }}
+                                  >
+                                    Item Added
+                                  </div>
+                                ) : (
+                                  <IconButton
+                                    onClick={(e) => {
+                                      addItemtoCart({ e, value });
                                     }}
-                                  />
-                                </IconButton>
+                                  >
+                                    <AddShoppingCartTwoToneIcon
+                                      style={{
+                                        // fontSize: "larger",
+
+                                        fill: "rgb(197, 146, 5)",
+                                      }}
+                                    />
+                                  </IconButton>
+                                )}
                               </CardActions>
                             </div>
                           </div>

@@ -4,16 +4,14 @@ import {
   REMOVE_ITEM_FROM_CART,
 } from "./types";
 
+///ADD ITEM TO CART
+
 export const addItem = ({ value, cartItems }) => {
-  console.log(cartItems, "cart aya");
   return (dispatch) => {
     var number = 1;
     if (cartItems.length > 0) {
       for (let item of cartItems) {
-        // console.log("ghusa yei ,mast");
-        // console.log(item, "    ", value.id);
         number = value.id === item.item.id ? parseInt(item.number) + 1 : 1;
-        console.log(number, "quantity hai yei");
       }
     }
     var totalAmount = number * parseInt(value.price);
@@ -32,6 +30,8 @@ export const addItem = ({ value, cartItems }) => {
   };
 };
 
+///ADD PRODUCT QUANTITY
+
 export const changeAmount = ({ value, task }) => {
   return async (dispatch) => {
     dispatch({
@@ -42,8 +42,9 @@ export const changeAmount = ({ value, task }) => {
   };
 };
 
+////REMOVE ITEM FROM CART
+
 export const removeItemfromCart = (value) => {
-  console.log("remove krne bol rhe hai");
   return async (dispacth) => {
     dispacth({
       type: REMOVE_ITEM_FROM_CART,

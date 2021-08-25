@@ -1,13 +1,12 @@
-import { ACTIVATE_MENU } from "./types"
+import { ACTIVATE_MENU } from "./types";
 
-export const ActivateMenu=(event)=>{
-    return async dispatch=>{
+////ACTIVATE LOGOUT MENU
 
-        dispatch({
-
-            type:ACTIVATE_MENU,
-            event
-
-        })
-    }
-}
+export const ActivateMenu = (event) => {
+  return async (dispatch) => {
+    dispatch({
+      type: ACTIVATE_MENU,
+      event,
+    });
+  };
+};

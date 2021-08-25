@@ -21,8 +21,8 @@ const error = (state = intialState, action) => {
     case REMOVE_ERROR:
       return {
         ...state,
-        SignUpError: intialState.SignUpError,
-        LoginError: intialState.LoginError,
+        SignUpError: "",
+        LoginError: "",
       };
 
     default:

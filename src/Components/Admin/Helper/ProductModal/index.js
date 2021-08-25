@@ -63,7 +63,6 @@ function ProductModal({ product }) {
               <div className="productModalBoxl">
                 <div className="productModalBoxtitle">Product Description</div>
               </div>{" "}
-              <div className="productModalBoxtitler">hel</div>
             </div>
             <div
               style={{
@@ -124,18 +123,6 @@ function ProductModal({ product }) {
                   {product.photoUrl.map((item) => (
                     <ImageListItem>
                       <img src={item} alt="j" />
-                      {/* <ImageListItemBar
-                    title={item.title}
-                    classes={{
-                      root: classes.titleBar,
-                      title: classes.title,
-                    }} */}
-                      {/* actionIcon={
-                      <IconButton aria-label={`star ${item.title}`}>
-                        <StarBorderIcon className={classes.title} />
-                      </IconButton>
-                    } */}
-                      {/* /> */}
                     </ImageListItem>
                   ))}
                 </ImageList>

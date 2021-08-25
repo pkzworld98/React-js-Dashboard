@@ -28,7 +28,7 @@ function AdminSidebar() {
               disableTypography
               primary={
                 <Typography type="body2" style={{}}>
-                  DashBoard
+                  Dash Board
                 </Typography>
               }
             />

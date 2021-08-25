@@ -11,7 +11,7 @@ import storage from "redux-persist/lib/storage";
 // );
 
 const persistConfig = {
-  key: "DASHBOAd Dataaa ddinallfldssddlsldfdl",
+  key: "FINAL",
   storage,
 };
 

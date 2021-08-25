@@ -115,13 +115,17 @@ function SignUpBox() {
             onChange={(e) => setEmail(e.target.value)}
             aria-describedby="emailHelp"
           />
-          <div
-            id="emailHelp"
-            class="form-text"
-            style={{ fontWeight: "lighter", opacity: "0.9", color: "wheat" }}
-          >
-            We'll never share your email with anyone else.
-          </div>
+          {error === "" ? (
+            <div
+              id="emailHelp"
+              class="form-text"
+              style={{ fontWeight: "lighter", opacity: "0.9", color: "wheat" }}
+            >
+              We'll never share your email with anyone else.
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label  my-1">

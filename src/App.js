@@ -9,7 +9,7 @@ import Dashboard from "./Containers/Admin/DashBoard";
 import UserList from "./Containers/Admin/UserList";
 import ViewProducts from "./Containers/Admin/ViewProducts";
 import Cart from "./Containers/Cart";
-import CreateAdmin from "./Containers/CreateAdmin";
+
 import Home from "./Containers/Home";
 import Login from "./Containers/Login";
 import Products from "./Containers/Products";
@@ -30,7 +30,6 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/createAdmin" exact component={CreateAdmin}></Route>
         <Route path="/products" exact component={Products}></Route>
         <Route path="/addProducts" exact component={AddProducts}></Route>
         <Route path="/userList" exact component={UserList}></Route>

@@ -25,19 +25,7 @@ function LoginBox() {
   const [pass, Setpass] = useState("");
   const error = useSelector((state) => state.error.LoginError);
 
-  const [adminrole, setAdminrole] = useState(false);
-
   const dispatch = useDispatch();
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-    if (event.target.checked) {
-      setAdminrole(true);
-    } else {
-      setAdminrole(false);
-    }
-  };
-  console.log(adminrole);
 
   console.log(error, "pke");
   //HADNLER OF SUMBIT
@@ -45,23 +33,13 @@ function LoginBox() {
   const sumbitHandler = (e) => {
     e.preventDefault();
     // console.log(email,pass,userName)
-    dispatch(login({ email, pass, adminrole }));
+    dispatch(login({ email, pass }));
   };
 
   const googleHandler = (e) => {
     e.preventDefault();
     dispatch(googleApi());
   };
-
-  const GreenCheckbox = withStyles({
-    root: {
-      color: green[400],
-      "&$checked": {
-        color: green[600],
-      },
-    },
-    checked: {},
-  })((props) => <Checkbox color="default" {...props} />);
 
   return (
     <div className="loginBox">
@@ -105,13 +83,17 @@ function LoginBox() {
             onChange={(e) => setEmail(e.target.value)}
             aria-describedby="emailHelp"
           />
-          <div
-            id="emailHelp"
-            class="form-text"
-            style={{ fontWeight: "lighter", opacity: "0.9", color: "wheat" }}
-          >
-            We'll never share your email with anyone else.
-          </div>
+          {error === "" ? (
+            <div
+              id="emailHelp"
+              class="form-text"
+              style={{ fontWeight: "lighter", opacity: "0.9", color: "wheat" }}
+            >
+              We'll never share your email with anyone else.
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label  my-1">
@@ -126,21 +108,7 @@ function LoginBox() {
             placeholder=" Enter the password"
           />
         </div>
-        <div
-          class="mb-3 form-check"
-          style={{ display: "flex", alignItems: "center", padding: "0px" }}
-        >
-          <FormControlLabel
-            control={
-              <GreenCheckbox
-                checked={state.checkedG}
-                onChange={handleChange}
-                name="checkedG"
-              />
-            }
-            label="Are you Admin ?"
-          />
-        </div>
+
         {error !== "" ? (
           <div
             class="form-text"

@@ -70,6 +70,8 @@
   color: rgb(197, 146, 5);
   margin-top: 20px;
   font-weight: bolder;
+
+  width: 60%;
   letter-spacing: 1px;
   font-size: 18px;
   word-wrap: break-word;
@@ -94,5 +96,5 @@
 .cart_items_button {
   position: absolute;
 
-  bottom: 100px;
+  bottom: 40px;
 }

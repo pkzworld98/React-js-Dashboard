@@ -1,6 +1,7 @@
 import {
   ADD_PRODUCT,
   ADD_TO_CART,
+  CLEAR_CART,
   FETCH_PRODUCTS,
   HANDLE_AMOUNT_CHANGE,
   REMOVE_ITEM_FROM_CART,
@@ -81,6 +82,11 @@ const products = (state = intitalState, action) => {
             (item) => item.item.id !== action.value.item.id
           ),
         ],
+      };
+    case CLEAR_CART:
+      return {
+        ...state,
+        cartItems: [],
       };
 
     default:

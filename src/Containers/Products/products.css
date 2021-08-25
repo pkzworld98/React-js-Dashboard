@@ -33,8 +33,12 @@
   align-items: center;
 }
 
+#currency {
+  margin-right: 10px;
+}
 .product_price {
   color: rgb(255, 187, 0);
+  display: flex;
 }
 .product_content_body {
   /* border: 3px solid red; */
@@ -63,4 +67,10 @@
   color: rgb(255, 187, 0);
   font-weight: 700;
   font-size: 40px;
+}
+
+.cardcontent_top {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

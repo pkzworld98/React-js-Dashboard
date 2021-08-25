@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     maxWidth: "90%",
-    maxHeight: "220px",
+    height: "220px",
+    // maxHeight: "220px",
 
     margin: "10px 30px",
     marginTop: "50px",
@@ -90,7 +91,7 @@ function Cart() {
                             className="totalp"
                             style={{ color: "rgb(197, 146, 5)" }}
                           >
-                            Price
+                            Price :
                           </div>
                           <div
                             className="totalAm"
@@ -104,7 +105,7 @@ function Cart() {
                             className="totalp"
                             style={{ color: "rgb(197, 146, 5)" }}
                           >
-                            Total Price
+                            Total Price :
                           </div>
                           <div
                             className="totalAm"
